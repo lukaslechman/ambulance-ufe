@@ -20,6 +20,8 @@ export namespace Components {
          */
         "middle": string;
     }
+    interface XleAmbulanceWlList {
+    }
 }
 declare global {
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
@@ -28,8 +30,15 @@ declare global {
         prototype: HTMLMyComponentElement;
         new (): HTMLMyComponentElement;
     };
+    interface HTMLXleAmbulanceWlListElement extends Components.XleAmbulanceWlList, HTMLStencilElement {
+    }
+    var HTMLXleAmbulanceWlListElement: {
+        prototype: HTMLXleAmbulanceWlListElement;
+        new (): HTMLXleAmbulanceWlListElement;
+    };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
+        "xle-ambulance-wl-list": HTMLXleAmbulanceWlListElement;
     }
 }
 declare namespace LocalJSX {
@@ -47,15 +56,26 @@ declare namespace LocalJSX {
          */
         "middle"?: string;
     }
+    interface XleAmbulanceWlList {
+    }
+
+    interface MyComponentAttributes {
+        "first": string;
+        "middle": string;
+        "last": string;
+    }
+
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "my-component": Omit<MyComponent, keyof MyComponentAttributes> & { [K in keyof MyComponent & keyof MyComponentAttributes]?: MyComponent[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `attr:${K}`]?: MyComponentAttributes[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `prop:${K}`]?: MyComponent[K] };
+        "xle-ambulance-wl-list": XleAmbulanceWlList;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "my-component": LocalJSX.IntrinsicElements["my-component"] & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "xle-ambulance-wl-list": LocalJSX.IntrinsicElements["xle-ambulance-wl-list"] & JSXBase.HTMLAttributes<HTMLXleAmbulanceWlListElement>;
         }
     }
 }
