@@ -7,12 +7,10 @@ describe('xle-ambulance-wl-list', () => {
       components: [XleAmbulanceWlList],
       html: `<xle-ambulance-wl-list></xle-ambulance-wl-list>`,
     });
-    expect(page.root).toEqualHtml(`
-      <xle-ambulance-wl-list>
-        <mock:shadow-root>
-          <slot></slot>
-        </mock:shadow-root>
-      </xle-ambulance-wl-list>
-    `);
+      const wlList = page.rootInstance as XleAmbulanceWlList;
+      const expectedPatients = wlList?.waitingPatients?.length
+
+      const items = page.root.shadowRoot.querySelectorAll("md-list-item");
+      expect(items.length).toEqual(expectedPatients);
   });
 });
