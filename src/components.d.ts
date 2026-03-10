@@ -21,6 +21,8 @@ export namespace Components {
         "middle": string;
     }
     interface XleAmbulanceWlApp {
+        "ambulanceId": string;
+        "apiBase": string;
         /**
           * @default ""
          */
@@ -30,6 +32,8 @@ export namespace Components {
         "entryId": string;
     }
     interface XleAmbulanceWlList {
+        "ambulanceId": string;
+        "apiBase": string;
     }
 }
 export interface XleAmbulanceWlEditorCustomEvent<T> extends CustomEvent<T> {
@@ -110,6 +114,8 @@ declare namespace LocalJSX {
         "middle"?: string;
     }
     interface XleAmbulanceWlApp {
+        "ambulanceId"?: string;
+        "apiBase"?: string;
         /**
           * @default ""
          */
@@ -120,6 +126,8 @@ declare namespace LocalJSX {
         "onEditor-closed"?: (event: XleAmbulanceWlEditorCustomEvent<string>) => void;
     }
     interface XleAmbulanceWlList {
+        "ambulanceId"?: string;
+        "apiBase"?: string;
         "onEntry-clicked"?: (event: XleAmbulanceWlListCustomEvent<string>) => void;
     }
 
@@ -130,16 +138,22 @@ declare namespace LocalJSX {
     }
     interface XleAmbulanceWlAppAttributes {
         "basePath": string;
+        "apiBase": string;
+        "ambulanceId": string;
     }
     interface XleAmbulanceWlEditorAttributes {
         "entryId": string;
+    }
+    interface XleAmbulanceWlListAttributes {
+        "apiBase": string;
+        "ambulanceId": string;
     }
 
     interface IntrinsicElements {
         "my-component": Omit<MyComponent, keyof MyComponentAttributes> & { [K in keyof MyComponent & keyof MyComponentAttributes]?: MyComponent[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `attr:${K}`]?: MyComponentAttributes[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `prop:${K}`]?: MyComponent[K] };
         "xle-ambulance-wl-app": Omit<XleAmbulanceWlApp, keyof XleAmbulanceWlAppAttributes> & { [K in keyof XleAmbulanceWlApp & keyof XleAmbulanceWlAppAttributes]?: XleAmbulanceWlApp[K] } & { [K in keyof XleAmbulanceWlApp & keyof XleAmbulanceWlAppAttributes as `attr:${K}`]?: XleAmbulanceWlAppAttributes[K] } & { [K in keyof XleAmbulanceWlApp & keyof XleAmbulanceWlAppAttributes as `prop:${K}`]?: XleAmbulanceWlApp[K] };
         "xle-ambulance-wl-editor": Omit<XleAmbulanceWlEditor, keyof XleAmbulanceWlEditorAttributes> & { [K in keyof XleAmbulanceWlEditor & keyof XleAmbulanceWlEditorAttributes]?: XleAmbulanceWlEditor[K] } & { [K in keyof XleAmbulanceWlEditor & keyof XleAmbulanceWlEditorAttributes as `attr:${K}`]?: XleAmbulanceWlEditorAttributes[K] } & { [K in keyof XleAmbulanceWlEditor & keyof XleAmbulanceWlEditorAttributes as `prop:${K}`]?: XleAmbulanceWlEditor[K] };
-        "xle-ambulance-wl-list": XleAmbulanceWlList;
+        "xle-ambulance-wl-list": Omit<XleAmbulanceWlList, keyof XleAmbulanceWlListAttributes> & { [K in keyof XleAmbulanceWlList & keyof XleAmbulanceWlListAttributes]?: XleAmbulanceWlList[K] } & { [K in keyof XleAmbulanceWlList & keyof XleAmbulanceWlListAttributes as `attr:${K}`]?: XleAmbulanceWlListAttributes[K] } & { [K in keyof XleAmbulanceWlList & keyof XleAmbulanceWlListAttributes as `prop:${K}`]?: XleAmbulanceWlList[K] };
     }
 }
 export { LocalJSX as JSX };
