@@ -2,6 +2,7 @@ import { Component, Event, EventEmitter, Host, Prop, State, h } from '@stencil/c
 import { AmbulanceWaitingListApi, WaitingListEntry, Configuration } from '../../api/ambulance-wl';
 
 
+
 @Component({
   tag: 'xle-ambulance-wl-list',
   styleUrl: 'xle-ambulance-wl-list.css',
@@ -13,16 +14,16 @@ export class XleAmbulanceWlList {
   @Prop() ambulanceId: string;
   @State() errorMessage: string;
 
- waitingPatients: WaitingListEntry[];
+  waitingPatients: WaitingListEntry[];
 
-private async getWaitingPatientsAsync(): Promise<WaitingListEntry[]> {
+  private async getWaitingPatientsAsync(): Promise<WaitingListEntry[]> {
     try {
       const configuration = new Configuration({
         basePath: this.apiBase,
       });
 
       const waitingListApi = new AmbulanceWaitingListApi(configuration);
-      const response = await waitingListApi.getWaitingListEntriesRaw({ambulanceId: this.ambulanceId})
+      const response = await waitingListApi.getWaitingListEntriesRaw({ ambulanceId: this.ambulanceId })
       if (response.raw.status < 299) {
         return await response.value();
       } else {
@@ -41,19 +42,23 @@ private async getWaitingPatientsAsync(): Promise<WaitingListEntry[]> {
   render() {
     return (
       <Host>
-      {this.errorMessage
-        ? <div class="error">{this.errorMessage}</div>
-        :
-      <md-list>
-        {this.waitingPatients.map(patient =>
-          <md-list-item onClick={ () => this.entryClicked.emit(patient.id)} >
-            <div slot="headline">{patient.name}</div>
-            <div slot="supporting-text">{"Predpokladaný vstup: " + patient.estimatedStart?.toLocaleString()}</div>
-            <md-icon slot="start">person</md-icon>
-          </md-list-item>
-        )}
-      </md-list>
-      }
+        {this.errorMessage
+          ? <div class="error">{this.errorMessage}</div>
+          :
+          <md-list>
+            {this.waitingPatients.map(patient =>
+              <md-list-item onClick={() => this.entryClicked.emit(patient.id)} >
+                <div slot="headline">{patient.name}</div>
+                <div slot="supporting-text">{"Predpokladaný vstup: " + patient.estimatedStart?.toLocaleString()}</div>
+                <md-icon slot="start">person</md-icon>
+              </md-list-item>
+            )}
+          </md-list>
+        }
+        <md-filled-icon-button class="add-button"
+          onclick={() => this.entryClicked.emit("@new")}>
+          <md-icon>add</md-icon>
+        </md-filled-icon-button>
       </Host>
     );
   }
